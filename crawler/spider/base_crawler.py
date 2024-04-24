@@ -18,24 +18,24 @@ class BaseEntity:
 
     id = Column(Integer, primary_key=True)
     title = Column(String)
-    description = Column(String)
+    image_url = Column(String)
     content = Column(String)
     url = Column(String)
     category = Column(String)
     author = Column(String)
-    time_written = Column(String)
-    negative_content = Column(String)
+    sentiment = Column(String)
+    is_fake = Column(String)
 
-    def __init__(self, id, title, description, content, url, category, author, time_written, negative_content):
+    def __init__(self, id, title, url, image_url, author, content, created_at, sentiment, is_fake):
         self.id = id
         self.title = title
-        self.description = description
-        self.content = content
         self.url = url
-        self.category = category
+        self.image_url = image_url
+        self.content = content
         self.author = author
-        self.time_written = time_written
-        self.negative_content = negative_content
+        self.created_at = created_at
+        self.sentiment = sentiment
+        self.is_fake = is_fake
 
     def __repr__(self):
         return "<id {}>".format(self.id)
@@ -44,20 +44,20 @@ class BaseEntity:
         return {
             'id': self.id,
             'title': self.title,
-            'description': self.description,
-            'content': self.content,
             'url': self.url,
-            'category': self.category,
+            'image_url': self.image_url,
             'author': self.author,
-            'time_written': self.time_written,
-            'negative_content': self.negative_content
+            'content': self.content,
+            'created_at': self.created_at,
+            'sentiment': self.sentiment,
+            'is_fake': self.is_fake
         }
 
 
 class Article(BaseEntity):
-    # Code specific to Article class
-    pass
-
+    def __init__(self, id, title, url, image_url, author, content, created_at, sentiment, is_fake):
+        super().__init__(id=id, title=title, image_url=image_url, content=content, url=url, created_at=created_at,
+                         author=author, sentiment=sentiment, is_fake=is_fake)
 
 
 class BaseCrawler(ABC):
@@ -66,7 +66,7 @@ class BaseCrawler(ABC):
     @abstractmethod
     def extract_content(self, url):
         """
-        Extract title, description and paragraphs from url
+        Extract title, image_url and paragraphs from url
         @param url (str): url to crawl
         @return title (str)
         @return description (generator)

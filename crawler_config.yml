@@ -1,9 +1,4 @@
-#save to database
-database:
-  host: localhost
-  username: root
-  password: yagamilight2302
-  database: crawl_news
+
 
 # Web that want to crawls (only support vnexpress now)
 
@@ -22,4 +17,4 @@ num_workers: 1
 # article_type == "all" to crawl all of types
 article_type: "thoi-su"
 article_child: "chinh-tri"
-total_pages: 1
+total_pages: 2
