@@ -151,7 +151,7 @@ class BaseCrawler(ABC):
             if self.article_child:
                 error_urls = self.crawl_type(
                     self.article_type, urls_dpath, results_dpath, self.article_child)
-            else:
+            if not self.article_child:
                 error_urls = self.crawl_type(
                     self.article_type, urls_dpath, results_dpath, None)
         return error_urls
@@ -182,7 +182,7 @@ class BaseCrawler(ABC):
             error_urls = list()
             # getting urls
             self.logger.info(f"Getting urls of {article_type}...")
-            articles_urls = self.get_urls_of_type(article_type)
+            articles_urls = self.get_urls_of_type(article_type, None)
             articles_urls_fpath = "/".join([urls_dpath, f"{article_type}.txt"])
             with open(articles_urls_fpath, "w") as urls_file:
                 urls_file.write("\n".join(articles_urls))

@@ -2,10 +2,10 @@
 
 # Web that want to crawls (only support vnexpress now)
 
-webname: "vnexpress"
+webname: "viettan"
 
 # tasks = ["url", "type"]
-task: "type"
+task: "url"
 
 #logger config file path
 logger_fpath: "logger/logger_config.yml"
@@ -16,5 +16,5 @@ num_workers: 1
 # if task == "type": 
 # article_type == "all" to crawl all of types
 article_type: "thoi-su"
-article_child: "chinh-tri"
-total_pages: 2
+article_child: ""
+total_pages: 1
